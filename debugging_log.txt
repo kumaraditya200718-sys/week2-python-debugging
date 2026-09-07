@@ -1,0 +1,133 @@
+WEEK 2 DEBUGGING LOG
+
+Student Name: Aditya Kumar
+Project: Student Marks Management System
+
+
+BUG 1: TypeError During Average Calculation
+
+Problem:
+When I entered 80, 90 and 70 as marks, the program showed a
+TypeError while calculating the average.
+
+Error:
+TypeError: unsupported operand type(s) for +: 'int' and 'str'
+
+Cause:
+The input() function returns a string. The program was trying
+to add the string mark to the integer variable total.
+
+Original Code:
+mark = input("Enter mark " + str(i) + ": ")
+
+Fixed Code:
+mark = int(input("Enter mark " + str(i) + ": "))
+
+Testing:
+I tested the program again with marks 80, 90 and 70.
+The program calculated the average as 80.0 and displayed
+Grade B.
+
+Status: FIXED
+
+
+BUG 2: Invalid Text Input
+
+Problem:
+When text such as "abc" was entered instead of a mark,
+the program produced an error.
+
+Cause:
+The program tried to convert invalid text into an integer.
+
+Solution:
+A try-except block was added to handle invalid input.
+
+Testing:
+I entered "abc" as the first mark. The program displayed
+"Please enter a valid number." and asked me to enter the
+mark again.
+
+Status: FIXED
+
+
+BUG 3: Invalid Mark Range
+
+Problem:
+The program could accept marks greater than 100 or less
+than 0.
+
+Cause:
+There was no validation for the mark range.
+
+Solution:
+A condition was added to allow marks only between 0 and 100.
+
+Testing:
+I entered 120 as a mark. The program displayed:
+"Mark must be between 0 and 100."
+
+Status: FIXED
+
+
+CODE QUALITY IMPROVEMENT: FILE HANDLING
+
+Original Code:
+file = open("results.txt", "w")
+file.write(name + "," + str(average) + "," + grade + "\n")
+file.close()
+
+Improved Code:
+with open("results.txt", "w") as file:
+    file.write(name + "," + str(average) + "," + grade + "\n")
+
+Reason:
+The with open() statement automatically closes the file after
+the writing operation. This makes the code cleaner and safer.
+
+
+FINAL TESTING
+
+Test 1:
+Student name: Aditya
+Marks: 80, 90, 70
+Expected: Average 80.0 and Grade B
+Result: PASS
+
+Test 2:
+Input: abc
+Expected: Invalid number message
+Result: PASS
+
+Test 3:
+Input: 120
+Expected: Mark range warning
+Result: PASS
+
+Test 4:
+Input: 80, 90, 70 after invalid inputs
+Expected: Correct result
+Result: PASS
+
+Test 5:
+Result file
+Expected: Student result saved in results.txt
+Result: PASS
+
+
+FINAL RESULT
+
+The Python application was successfully debugged and tested.
+The program now handles invalid input, validates marks between
+0 and 100, calculates the average correctly, assigns a grade,
+and saves the student's result to results.txt.
+
+The final result was:
+
+Student: Aditya
+Average: 80.0
+Grade: B
+
+The results.txt file contains:
+
+Aditya,80.0,B
